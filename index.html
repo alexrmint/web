@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualización de Grupos de Trabajo con Pestañas Anidadas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Estilos para pestañas principales */
+        .main-tab-button.active {
+            border-bottom-width: 2px;
+            border-color: #3b82f6; /* Azul */
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        /* Estilos para sub-pestañas */
+        .sub-tab-button {
+            padding: 0.5rem 1rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem; /* Añadido margen inferior para wrap */
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            color: #4b5563; /* text-gray-600 */
+            background-color: #f3f4f6; /* bg-gray-100 */
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .sub-tab-button:hover {
+             background-color: #e5e7eb; /* bg-gray-200 */
+        }
+        .sub-tab-button.active {
+            background-color: #3b82f6; /* bg-blue-600 */
+            color: white;
+        }
+
+        /* Ocultar contenido de pestañas/sub-pestañas no activas */
+        .main-tab-content, .sub-tab-content {
+            display: none;
+        }
+        .main-tab-content.active, .sub-tab-content.active {
+            display: block;
+        }
+        /* Asegurar que los botones de pestañas se ajusten en pantallas pequeñas */
+        .tab-nav-container {
+             display: flex;
+             flex-wrap: wrap; /* Permite que los botones pasen a la siguiente línea */
+             margin-bottom: -1px; /* Ajuste para la línea inferior */
+        }
+         .main-tab-button {
+            margin-bottom: 1px; /* Espacio si se envuelven */
+         }
+         .sub-tab-container {
+            display: flex;
+            flex-wrap: wrap; /* Permite que los botones pasen a la siguiente línea */
+         }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-4 sm:p-6 md:p-10 font-inter"> <div class="container mx-auto max-w-4xl bg-white rounded-lg shadow-md p-4 sm:p-6"> <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">EQUIPO DEL TRIUNFO POPAYAN</h1>
+
+        <div class="border-b border-gray-200 mb-6">
+            <nav class="tab-nav-container" aria-label="Main Tabs">
+                <button id="main-tab-button-whatsapp" onclick="switchMainTab('whatsapp')" class="main-tab-button active whitespace-nowrap py-3 px-2 sm:px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300" aria-current="page">
+                    Equipo: WhatsApp
+                </button>
+                <button id="main-tab-button-seguimiento" onclick="switchMainTab('seguimiento')" class="main-tab-button whitespace-nowrap py-3 px-2 sm:px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                    Equipo: Seguimiento
+                </button>
+                <button id="main-tab-button-plan" onclick="switchMainTab('plan')" class="main-tab-button whitespace-nowrap py-3 px-2 sm:px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                    Equipo: Dar el Plan
+                </button>
+                 <button id="main-tab-button-publicidad" onclick="switchMainTab('publicidad')" class="main-tab-button whitespace-nowrap py-3 px-2 sm:px-1 border-b-2 font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                    Equipo: Publicidad
+                </button>
+            </nav>
+        </div>
+
+        <div>
+            <div id="main-tab-content-whatsapp" class="main-tab-content active p-4 rounded-md bg-gray-50">
+                <h2 class="text-xl font-semibold text-blue-600 mb-4">Detalles del Equipo: WhatsApp</h2>
+                <div class="mb-4 sub-tab-container"> <button id="sub-tab-button-whatsapp-funciones" onclick="switchSubTab('whatsapp', 'funciones')" class="sub-tab-button active">Funciones</button>
+                    <button id="sub-tab-button-whatsapp-integrantes" onclick="switchSubTab('whatsapp', 'integrantes')" class="sub-tab-button">Integrantes</button>
+                </div>
+                <div>
+                    <div id="sub-tab-content-whatsapp-funciones" class="sub-tab-content active">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Funciones Principales:</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>Función 1: [Describe la función aquí]</li>
+                            <li>Función 2: [Describe la función aquí]</li>
+                            <li>...</li>
+                        </ul>
+                    </div>
+                    <div id="sub-tab-content-whatsapp-integrantes" class="sub-tab-content">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Integrantes:</h3>
+                        {/* */}
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Audilia</li>
+                            <li>Yovany</li>
+                            <li>Yolima</li>
+                            <li>Yuliana Villegas</li>
+                            <li>María</li>
+                            <li>Diana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-tab-content-seguimiento" class="main-tab-content p-4 rounded-md bg-gray-50">
+                <h2 class="text-xl font-semibold text-green-600 mb-4">Detalles del Equipo: Seguimiento</h2>
+                 <div class="mb-4 sub-tab-container"> <button id="sub-tab-button-seguimiento-funciones" onclick="switchSubTab('seguimiento', 'funciones')" class="sub-tab-button active">Funciones</button>
+                    <button id="sub-tab-button-seguimiento-integrantes" onclick="switchSubTab('seguimiento', 'integrantes')" class="sub-tab-button">Integrantes</button>
+                </div>
+                <div>
+                    <div id="sub-tab-content-seguimiento-funciones" class="sub-tab-content active">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Funciones Principales:</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>Función 1: [Describe la función aquí]</li>
+                            <li>...</li>
+                        </ul>
+                    </div>
+                    <div id="sub-tab-content-seguimiento-integrantes" class="sub-tab-content">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Integrantes:</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>[Nombre del Integrante 1]</li>
+                            <li>...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-tab-content-plan" class="main-tab-content p-4 rounded-md bg-gray-50">
+                <h2 class="text-xl font-semibold text-purple-600 mb-4">Detalles del Equipo: Dar el Plan</h2>
+                 <div class="mb-4 sub-tab-container"> <button id="sub-tab-button-plan-funciones" onclick="switchSubTab('plan', 'funciones')" class="sub-tab-button active">Funciones</button>
+                    <button id="sub-tab-button-plan-integrantes" onclick="switchSubTab('plan', 'integrantes')" class="sub-tab-button">Integrantes</button>
+                </div>
+                <div>
+                    <div id="sub-tab-content-plan-funciones" class="sub-tab-content active">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Funciones Principales:</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>Función 1: [Describe la función aquí]</li>
+                            <li>...</li>
+                        </ul>
+                    </div>
+                    <div id="sub-tab-content-plan-integrantes" class="sub-tab-content">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Integrantes:</h3>
+                        {/* */}
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                            <li>Juancho</li>
+                            <li>Yovany</li>
+                            <li>Dario Villegas</li>
+                            <li>Diana</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+             <div id="main-tab-content-publicidad" class="main-tab-content p-4 rounded-md bg-gray-50">
+                <h2 class="text-xl font-semibold text-yellow-600 mb-4">Detalles del Equipo: Publicidad</h2>
+                 <div class="mb-4 sub-tab-container"> <button id="sub-tab-button-publicidad-funciones" onclick="switchSubTab('publicidad', 'funciones')" class="sub-tab-button active">Funciones</button>
+                    <button id="sub-tab-button-publicidad-integrantes" onclick="switchSubTab('publicidad', 'integrantes')" class="sub-tab-button">Integrantes</button>
+                </div>
+                <div>
+                    <div id="sub-tab-content-publicidad-funciones" class="sub-tab-content active">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Funciones Principales:</h3>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>Función 1: [Describe la función aquí]</li>
+                            <li>...</li>
+                        </ul>
+                    </div>
+                    <div id="sub-tab-content-publicidad-integrantes" class="sub-tab-content">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Integrantes:</h3>
+                        {/* */}
+                        <ul class="list-disc list-inside text-gray-600 space-y-1">
+                           <li>Juancho</li>
+                           <li>Alex Ramirez Montenegro</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div> <script>
+        // Función para cambiar entre pestañas PRINCIPALES
+        function switchMainTab(tabId) {
+            // Ocultar todo el contenido de las pestañas principales
+            const mainTabContents = document.querySelectorAll('.main-tab-content');
+            mainTabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Quitar la clase 'active' de todos los botones de pestaña principales
+            const mainTabButtons = document.querySelectorAll('.main-tab-button');
+            mainTabButtons.forEach(button => {
+                button.classList.remove('active');
+                button.setAttribute('aria-current', 'false');
+            });
+
+            // Mostrar el contenido de la pestaña principal seleccionada
+            const selectedMainContent = document.getElementById(`main-tab-content-${tabId}`);
+            if (selectedMainContent) {
+                selectedMainContent.classList.add('active');
+                // Asegurarse de que la primera sub-pestaña ('funciones') esté activa por defecto al cambiar de pestaña principal
+                const firstSubTabButton = selectedMainContent.querySelector('.sub-tab-button'); // Busca el primer botón de sub-pestaña
+                if (firstSubTabButton && firstSubTabButton.id) {
+                     const parts = firstSubTabButton.id.split('-');
+                     const mainId = parts[3];
+                     const subId = parts[4]; // Asume que el primero siempre será 'funciones' o similar
+                     switchSubTab(mainId, subId); // Activa la primera sub-pestaña encontrada
+                }
+            }
+
+            // Marcar el botón de la pestaña principal seleccionada como activo
+            const selectedMainButton = document.getElementById(`main-tab-button-${tabId}`);
+            if (selectedMainButton) {
+                selectedMainButton.classList.add('active');
+                selectedMainButton.setAttribute('aria-current', 'page');
+            }
+        }
+
+        // Función para cambiar entre SUB-PESTAÑAS dentro de una pestaña principal
+        function switchSubTab(mainTabId, subTabId) {
+            // Encontrar el contenedor de la pestaña principal activa
+            const mainTabContent = document.getElementById(`main-tab-content-${mainTabId}`);
+            if (!mainTabContent) return; // Salir si no se encuentra
+
+            // Ocultar todo el contenido de las sub-pestañas DENTRO de la pestaña principal actual
+            const subTabContents = mainTabContent.querySelectorAll('.sub-tab-content');
+            subTabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Quitar la clase 'active' de todos los botones de sub-pestaña DENTRO de la pestaña principal actual
+            const subTabButtons = mainTabContent.querySelectorAll('.sub-tab-button');
+            subTabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Mostrar el contenido de la sub-pestaña seleccionada
+            const selectedSubContent = document.getElementById(`sub-tab-content-${mainTabId}-${subTabId}`);
+            if (selectedSubContent) {
+                selectedSubContent.classList.add('active');
+            }
+
+            // Marcar el botón de la sub-pestaña seleccionada como activo
+            const selectedSubButton = document.getElementById(`sub-tab-button-${mainTabId}-${subTabId}`);
+            if (selectedSubButton) {
+                selectedSubButton.classList.add('active');
+            }
+        }
+
+        // Asegurarse de que la primera pestaña principal y su primera sub-pestaña estén activas al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+             const initialMainTabButton = document.querySelector('.main-tab-button.active');
+             if (initialMainTabButton) {
+                 const initialMainTabId = initialMainTabButton.id.split('-')[3];
+                 // Busca el primer botón de sub-pestaña en el contenido inicial
+                 const initialMainContent = document.getElementById(`main-tab-content-${initialMainTabId}`);
+                 const firstSubTabButton = initialMainContent?.querySelector('.sub-tab-button');
+                 if (firstSubTabButton && firstSubTabButton.id) {
+                     const initialSubTabId = firstSubTabButton.id.split('-')[4];
+                     switchSubTab(initialMainTabId, initialSubTabId); // Activa la primera sub-pestaña
+                 }
+             }
+        });
+
+    </script>
+
+</body>
+</html>
